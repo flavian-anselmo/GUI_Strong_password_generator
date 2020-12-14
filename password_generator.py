@@ -1,5 +1,4 @@
 #password generator with python_Tkinter
-#crafted by anselmo.Jr@Kibabii-University
 from tkinter import*
 from random import*
 from tkinter.font import Font
@@ -43,40 +42,48 @@ def generate_pwd():
             #cont_list=(alpha+pun+nums)
             #shuffle the list
             #the program will generate some number of passwords
-            counter_one=0
-            while counter_one!=int(number_pwd_entry.get()):
-                pwd_one=shuffle(cont_list_one)
-                pwd_one_very_strong=sample(cont_list_one,int(len_entry.get()))
-                print(str(pwd_one_very_strong))
-                pwd_list_box.insert(END,pwd_one_very_strong)
-                counter_one+=1
-            if counter_one==int(number_pwd_entry.get()):
-                    messagebox.showinfo("passord_creation_info",
-                    "{}  passwords have been generated".format(int(number_pwd_entry.get())))      
-            len_entry.delete(0,END)
-            number_pwd_entry.delete(0,END)
-    
-        elif strength_click.get()==stren_list[1]:
-            #strong_password
-            """
-            only get passwords with 
-            alpahbets and numeric passwords
-            """  
-            #shuffle again
-            #some number of passwords will be generated 
-            counter_two=0
-            while counter_two!=int(number_pwd_entry.get()):
-                pwd_two=shuffle(cont_list_two)
-                pwd_two_strong=sample(cont_list_two,int(len_entry.get()))
-                print(str(pwd_two_strong))
-                pwd_list_box.insert(END,pwd_two_strong) 
-                counter_two+=1
-            if counter_two==int(number_pwd_entry.get()):
+            if int(len_entry.get())>=8:
+              #password should be greater than 8  
+                counter_one=0
+                while counter_one!=int(number_pwd_entry.get()):
+                    pwd_one=shuffle(cont_list_one)
+                    pwd_one_very_strong=sample(cont_list_one,int(len_entry.get()))
+                    print(str(pwd_one_very_strong))
+                    pwd_list_box.insert(END,pwd_one_very_strong)
+                    counter_one+=1
+                if counter_one==int(number_pwd_entry.get()):
                         messagebox.showinfo("passord_creation_info",
-                        "{}  passwords have been generated".format(int(number_pwd_entry.get())))    
-            len_entry.delete(0,END)
-            number_pwd_entry.delete(0,END)
-            
+                        "{}  passwords have been generated".format(int(number_pwd_entry.get())))      
+                len_entry.delete(0,END)
+                number_pwd_entry.delete(0,END)
+            elif(int(len_entry.get()))<8:
+                messagebox.showerror("password_length_error",
+                "password_cannot have a length less than 8 characters")    
+        if int(len_entry.get())>8:
+            #the password should be greater than 8
+            if strength_click.get()==stren_list[1]:
+                #strong_password
+                """
+                only get passwords with 
+                alpahbets and numeric passwords
+                """  
+                #shuffle again
+                #some number of passwords will be generated 
+                counter_two=0
+                while counter_two!=int(number_pwd_entry.get()):
+                    pwd_two=shuffle(cont_list_two)
+                    pwd_two_strong=sample(cont_list_two,int(len_entry.get()))
+                    print(str(pwd_two_strong))
+                    pwd_list_box.insert(END,pwd_two_strong) 
+                    counter_two+=1
+                if counter_two==int(number_pwd_entry.get()):
+                            messagebox.showinfo("passord_creation_info",
+                            "{}  passwords have been generated".format(int(number_pwd_entry.get())))    
+                len_entry.delete(0,END)
+                number_pwd_entry.delete(0,END)
+        elif(int(len_entry.get()))<8:
+            messagebox.showerror("password_creation_error","password_cannot have less than 8 characters")        
+                
     except:
         if  len(len_entry.get())==0:
         #showerror
